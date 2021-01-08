@@ -301,7 +301,7 @@ export class AnnotationFactory {
             defaultAppearance: "/Invalid_font 9 Tf",
             fontSize: fontSize,
             fontColor: fontColor,
-            fillColor: fillColor,
+            color: fillColor,
             border: {
                 horizontal_corner_radius: 0, // not needed
                 vertical_corner_radius: 0, // not needed
