@@ -41,6 +41,7 @@ export class Writer {
     public static BORDER: number[] = [47, 66, 111, 114, 100, 101, 114] // = '/Border'
     public static PAGE_REFERENCE: number[] = [47, 80] // = '/P'
     public static DEFAULT_APPEARANCE: number[] = [47, 68, 65] // = '/DA'
+    public static DS: number[] = [47, 68, 83] // = '/DS'
     public static INKLIST: number[] = [47, 73, 110, 107, 76, 105, 115, 116] // = '/InkList'
 
     public static TRAILER: number[] = [116, 114, 97, 105, 108, 101, 114] // = 'trailer'
@@ -362,6 +363,22 @@ export class Writer {
             ret.push(Writer.SPACE)
             ret.push(Writer.BRACKET_START)
             ret = ret.concat(Util.convertStringToAscii(annot.defaultAppearance))
+            ret.push(Writer.BRACKET_END)
+            ret.push(Writer.SPACE)
+        }
+        if (annot.fontSize && annot.fontColor) {
+            // /DS (font: 12pt Arial; color: #FF0000)
+            if (annot.fontColor.r > 1) annot.fontColor.r /= 255
+            if (annot.fontColor.g > 1) annot.fontColor.g /= 255
+            if (annot.fontColor.b > 1) annot.fontColor.b /= 255
+            let colorHex = Util.convertByteArrayToHexString([annot.fontColor.r, annot.fontColor.g, annot.fontColor.b])
+            
+            ret.push(Writer.SPACE)
+            ret = ret.concat(Writer.DS)
+            ret.push(Writer.SPACE)
+            ret.push(Writer.BRACKET_START)
+            let appearanceString = `font: ${annot.fontSize}px Arial; color: #${colorHex};`;
+            ret = ret.concat(Util.convertStringToAscii(appearanceString))
             ret.push(Writer.BRACKET_END)
             ret.push(Writer.SPACE)
         }

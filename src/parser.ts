@@ -77,6 +77,9 @@ export class Annotation {
     interior_color?: number[]
     measure?: any
     is_deleted?: boolean
+    fontSize?: number
+    fontColor?: Color | undefined = undefined // font color specifically for FreeText Annotation
+    fillColor?: Color | undefined = undefined // fill color specifically for FreeText Annotation
 
 
     constructor(private data: Uint8Array = new Uint8Array([]), private cryptoInterface : CryptoInterface = new CryptoInterface()) {
