@@ -368,9 +368,9 @@ export class Writer {
         }
         if (annot.fontSize && annot.fontColor) {
             // /DS (font: 12pt Arial; color: #FF0000)
-            if (annot.fontColor.r > 1) annot.fontColor.r /= 255
-            if (annot.fontColor.g > 1) annot.fontColor.g /= 255
-            if (annot.fontColor.b > 1) annot.fontColor.b /= 255
+            if (annot.fontColor.r === 1) annot.fontColor.r = 255
+            if (annot.fontColor.g === 1) annot.fontColor.g = 255
+            if (annot.fontColor.b === 1) annot.fontColor.b = 255
             let colorHex = Util.convertByteArrayToHexString([annot.fontColor.r, annot.fontColor.g, annot.fontColor.b])
             
             ret.push(Writer.SPACE)
