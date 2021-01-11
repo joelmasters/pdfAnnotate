@@ -329,15 +329,18 @@ export class Writer {
         }
 
         if (annot.fill) {
-            if (annot.fill.r > 1) annot.fill.r /= 255
-            if (annot.fill.g > 1) annot.fill.g /= 255
-            if (annot.fill.b > 1) annot.fill.b /= 255
+            if (annot.fill.r !== -1) {
+                // -1 means transparent
+                if (annot.fill.r > 1) annot.fill.r /= 255
+                if (annot.fill.g > 1) annot.fill.g /= 255
+                if (annot.fill.b > 1) annot.fill.b /= 255
 
-            ret.push(Writer.SPACE)
-            ret = ret.concat(Writer.FILL)
-            ret.push(Writer.SPACE)
-            ret = ret.concat(WriterUtil.writeNumberArray([annot.fill.r, annot.fill.g, annot.fill.b]))
-            ret.push(Writer.SPACE)
+                ret.push(Writer.SPACE)
+                ret = ret.concat(Writer.FILL)
+                ret.push(Writer.SPACE)
+                ret = ret.concat(WriterUtil.writeNumberArray([annot.fill.r, annot.fill.g, annot.fill.b]))
+                ret.push(Writer.SPACE)
+            }
         }
 
 
